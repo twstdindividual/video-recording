@@ -1,9 +1,73 @@
-<navbar></navbar>
-<header>
-  <hero></hero>
-</header>
-<main>
-  <div>
-    <h1>Found in {{ $ctrl.name }}.html</h1>
+<!-- <navbar></navbar> -->
+<main ng-keydown="$ctrl.onKeypress($event)">
+  <div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+          <!-- Video section -->
+          <div class="col-xs-8">
+            <div class="row">
+              <div class="col-xs-12">
+                <video
+                  height="540"
+                  width="960"
+                  ng-src="{{$ctrl.currentVideo}}"
+                  ng-attr-autoplay="{{$ctrl.isAutoplay || undefined}}"
+                  controls>
+                </video>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">
+                <button
+                  class="btn clip-select-button"
+                  type="button"
+                  ng-click="$ctrl.changeVideoClip($ctrl.videos.FIRST_VIDEO)">1</button>
+              </div>
+              <div class="col-xs-4">
+                <button
+                  class="btn clip-select-button"
+                  type="button"
+                  ng-click="$ctrl.changeVideoClip($ctrl.videos.SECOND_VIDEO)">2</button>
+              </div>
+              <div class="col-xs-4">
+                <button
+                  class="btn clip-select-button"
+                  type="button"
+                  ng-click="$ctrl.changeVideoClip($ctrl.videos.THIRD_VIDEO)">3</button>
+              </div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <div class="col-xs-3">
+            <div class="row">
+              <div class="col-xs-12">
+                <button class="btn record-button" type="button" ng-click="$ctrl.toggleRecord()">{{ $ctrl.recordButtonLabel }}</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-9">
+                  <input class="form-control" type="text" ng-model="$ctrl.lastRecord.title" placeholder="Name">
+              </div>
+              <div class="col-xs-3">
+                <button
+                  class="btn save-button"
+                  type="button"
+                  ng-if="$ctrl.showSaveButton()"
+                  ng-click="$ctrl.saveRecordedVideo()">
+                  Save
+                </button>
+              </div>
+            </div>
+            <div class="row saved-record" ng-repeat="record in $ctrl.savedRecords">
+              <div class="col-xs-6">
+                {{ record.title || 'record' + $index+1 }}
+              </div>
+              <div class="col-xs-6">
+                <button class="btn" type="button" ng-click="$ctrl.playRecord(record.id)">Play</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 </main>

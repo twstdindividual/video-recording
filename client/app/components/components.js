@@ -1,12 +1,12 @@
 import angular from 'angular';
 import Home from './home/home';
-import About from './about/about';
+import AdminPanel  from './admin-panel/admin-panel'
 
 let componentModule = angular.module('app.components', [
   Home,
-  About
+  AdminPanel
 ])
-
 .name;
+console.log('componentModule', componentModule);
 
 export default componentModule;
