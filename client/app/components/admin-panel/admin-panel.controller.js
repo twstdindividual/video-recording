@@ -21,22 +21,27 @@ class AdminPanelController {
     this.$http.delete('/api', {params: {_id: id}});
   }
 
+  _getRecordLength(record) {
+    let result = 0;
+    for (let source of record.sources) {
+      result += parseFloat(source.src.substr(source.src.length - 8));
+    }
+    return result;
+  }
+
+  getDistribution(record, source) {
+    const recordLength =  this._getRecordLength(record);
+    return Math.ceil(parseFloat(source.src.substr(source.src.length - 8)) / recordLength * 100) + '%';
+  }
+
   getAverageRate() {
-    let overallTimeArr = [];
+    let allRecordLength = 0;
     let result = 0;
     for (let record of this.savedRecords) {
-      let overallTime = 0;
-      for (let source of record.sources) {
-        overallTime += parseFloat(source.src.substr(source.src.length - 8));
-      }
-      overallTimeArr.push(overallTime);
+      allRecordLength += this._getRecordLength(record);
     }
 
-    for (let time of overallTimeArr) {
-      result += time;
-    }
-
-    return Math.round(this.savedRecords.length / result * 100) / 100;
+    return Math.round(this.savedRecords.length / allRecordLength * 100) / 100;
   }
 }
 
