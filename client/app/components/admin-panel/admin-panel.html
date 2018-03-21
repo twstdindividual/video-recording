@@ -1,17 +1,16 @@
 <h1>Saved records: {{ $ctrl.savedRecords.length }}</h1>
+<h1>Average rate: {{ $ctrl.getAverageRate() }}</h1>
 <table class="table">
   <thead>
       <tr>
         <th>Title</th>
-        <th>Average rate</th>
         <th>Distribution</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="record in $ctrl.savedRecords">
-        <td>{{ record.title }}</td>
-        <td>Doe</td>
+        <td>{{ ::record.title }}</td>
         <td>john@example.com</td>
         <td>
           <button class="btn btn-danger" type="button" ng-click="$ctrl.deleteVideo(record._id)">Delete</button>

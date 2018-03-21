@@ -44,7 +44,8 @@ app.route('/api')
       });
   })
   .delete((req, res) => {
-    const id = req.url.substr(req.url.length - 23); // 23 - number of characters in record id
+    const id = req.url.substr(req.url.length - 24); // 24 - number of characters in record id
+
     Record.find({ _id: id }).remove().exec();
   });
 
